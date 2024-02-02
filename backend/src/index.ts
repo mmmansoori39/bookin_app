@@ -1,16 +1,32 @@
-import express from 'express';
+import express, { Request, Response} from 'express';
 import cors from 'cors';
 import  "dotenv/config";
 import mongoose from 'mongoose';
+import userRoutes from './routes/users'
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
+
+mongoose.connection.on('connected', () => {
+    console.log('Connected to MongoDB');
+  });
+  
+  mongoose.connection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
+  });
+  
+  mongoose.connection.on('disconnected', () => {
+    console.log('Disconnected from MongoDB');
+  });
+  
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
-app.get("/api/test", async (req, res) => {
+app.use("/api/users", userRoutes)
+
+app.get("/api/test", async (req: Request, res: Response) => {
     res.json({massage: "Hello from express endpoin!"});
 });
 
