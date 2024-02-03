@@ -7,7 +7,7 @@ import authRoutes from "./routes/auth";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB");
