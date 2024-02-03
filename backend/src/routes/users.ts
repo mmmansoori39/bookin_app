@@ -14,7 +14,7 @@ router.post("/register", [
 ], async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.status(400).json({ massage: errors.array()});
+        return res.status(400).json({ message: errors.array()});
     }
     try {
         let user = await User.findOne({
@@ -22,7 +22,7 @@ router.post("/register", [
         });
 
         if(user){
-            return res.status(400).json({massage: "User already exists"});
+            return res.status(400).json({message: "User already exists"});
         }
 
         user = new User(req.body);
@@ -40,7 +40,7 @@ router.post("/register", [
         return res.sendStatus(200);
     } catch (error) {
         console.log(error);
-        res.status(500).send({massage: "Something went wrong"})
+        res.status(500).send({message: "Something went wrong"})
     }
 })
 
