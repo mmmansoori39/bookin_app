@@ -29,8 +29,8 @@ const ImagesSection = () => {
       <div className=" border rounded p-4 flex flex-col gap-4">
         {existingImagesUrls && (
           <div className="grid grid-cols-6 gap-4">
-            {existingImagesUrls.map((url) => (
-              <div className="relative group">
+            {existingImagesUrls.map((url, i) => (
+              <div className="relative group" key={i}>
                 <img src={url} className="min-h-full object-cover" />
                 <button
                 onClick={(event) => handleDelete(event, url)}

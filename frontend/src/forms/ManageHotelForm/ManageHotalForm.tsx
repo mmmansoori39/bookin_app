@@ -22,8 +22,8 @@ export type HotelFormData = {
   imageUrls: string[];
 };
 
-type Props = {
-  hotel?: HotelType;
+export type Props = {
+  hotel: HotelType;
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
@@ -33,10 +33,11 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
   const { handleSubmit, reset } = formMethods;
 
   useEffect(() => {
-    reset(hotel);
+    if(hotel){
+      reset(hotel)
+    }
   }, [hotel, reset]);
 
-  console.log(hotel)
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     const formData = new FormData();
