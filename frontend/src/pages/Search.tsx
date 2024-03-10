@@ -20,10 +20,10 @@ const Search = () => {
 
   const searchParams = {
     desination: search.destination,
-    checkIn: search.chechIn.toString(),
-    chechOut: search.chechOut.toString(),
-    adultCount: search.adultCount.toString(),
-    childCount: search.childCount.toString(),
+    checkIn: search.checkIn?.toString(),
+    chechOut: search.checkOut?.toString(),
+    adultCount: search.adultCount?.toString(),
+    childCount: search.childCount?.toString(),
     page: page.toString(),
     stars: selectedStars,
     types: selectedHotelTypes,
@@ -120,7 +120,7 @@ const Search = () => {
           </select>
         </div>
         {hotelData?.data.map((hotel) => (
-          <SearchResultsCard hotel={hotel} />
+          <SearchResultsCard hotel={hotel} key={hotel._id}/>
         ))}
         <div>
           <Pagination
