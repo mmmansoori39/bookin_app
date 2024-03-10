@@ -18,8 +18,8 @@ const SearchResultsCard = ({hotel}: Props) => (
                 <div>
                   <div className="flex items-center">
                     <span className="flex">
-                      {Array.from({ length: hotel.starRating }).map((a,b) => (
-                        <AiFillStar className="fill-yellow-400" key={b} />
+                      {Array.from({ length: hotel.starRating }).map((_,i) => (
+                        <AiFillStar className="fill-yellow-400" key={i} />
                       ))}
                     </span>
                     <span className="ml-1 text-sm"> {hotel.type} </span>

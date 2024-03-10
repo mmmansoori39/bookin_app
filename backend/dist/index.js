@@ -21,6 +21,15 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const path_1 = __importDefault(require("path"));
+const cloudinary_1 = require("cloudinary");
+const my_hotels_1 = __importDefault(require("./routes/my-hotels"));
+const hotels_1 = __importDefault(require("./routes/hotels"));
+const my_bookings_1 = __importDefault(require("./routes/my-bookings"));
+cloudinary_1.v2.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 mongoose_1.default.connect(process.env.MONGODB_CONNECTION_STRING);
 mongoose_1.default.connection.on("connected", () => {
     console.log("Connected to MongoDB");
@@ -43,6 +52,12 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.static(path_1.default.join(__dirname, "../../frontend/dist")));
 app.use("/api/auth", auth_1.default);
 app.use("/api/users", users_1.default);
+app.use("/api/my-hotels", my_hotels_1.default);
+app.use("/api/hotels", hotels_1.default);
+app.use("api/my-bookings", my_bookings_1.default);
+app.get("*", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '../../frontend/dist/index.html'));
+});
 app.get("/api/test", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({ massage: "Hello from express endpoin!" });
 }));
