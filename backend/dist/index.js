@@ -41,6 +41,12 @@ mongoose_1.default.connection.on("disconnected", () => {
     console.log("Disconnected from MongoDB");
 });
 const app = (0, express_1.default)();
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'https://booking-app-ebg6.onrender.com');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json({ limit: "10mb" }));
