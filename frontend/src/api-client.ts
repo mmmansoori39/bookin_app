@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 import {
@@ -179,16 +180,26 @@ export const searchHotels = async (
   return response.json();
 };
 
+// export const fetchHotels = async (): Promise<HotelType[]> => {
+//   const response = await fetch(
+//     `${API_BASE_URL}/api/hotels`);
+
+//     if(!response.ok){
+//       throw new Error("Error fetching hotels")
+//     }
+
+//     return response.json()
+// }
+
 export const fetchHotels = async (): Promise<HotelType[]> => {
-  const response = await fetch(
-    `${API_BASE_URL}/api/hotels`);
+  try {
+    const response = await axios.get(`${API_BASE_URL}/api/hotels`, { withCredentials: true });
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching hotels");
+  }
+};
 
-    if(!response.ok){
-      throw new Error("Error fetching hotels")
-    }
-
-    return response.json()
-}
 
 export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
   const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
