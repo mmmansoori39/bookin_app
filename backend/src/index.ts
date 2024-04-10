@@ -43,12 +43,12 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors({
-//   origin: 'https://booking-app-ebg6.onrender.com',
-//   credentials: true // Enable credentials (cookies)
-// }));
+app.use(cors({
+  origin: 'https://booking-app-ebg6.onrender.com',
+  credentials: true // Enable credentials (cookies)
+}));
 
-app.use(cors())
+// app.use(cors())
 
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 

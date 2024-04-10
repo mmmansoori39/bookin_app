@@ -9,10 +9,10 @@ import {
 } from "../../backend/src/shared/types";
 import { BookingFormData } from "./forms/BookingForm/BookingForm";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const fetchCurrentUser = async (): Promise<UserType> => {
-  const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+  const response = await fetch(`/api/users/me`, {
     credentials: "include",
   });
   if (!response.ok) {
@@ -22,7 +22,7 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
 };
 
 export const register = async (formData: RegisterFormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/users/register`, {
+  const response = await fetch(`/api/users/register`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -39,7 +39,7 @@ export const register = async (formData: RegisterFormData) => {
 };
 
 export const signIn = async (formData: SignInFormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+  const response = await fetch(`/api/auth/login`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -57,10 +57,11 @@ export const signIn = async (formData: SignInFormData) => {
 };
 
 export const validateToken = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+  const response = await fetch(`/api/auth/validate-token`, {
     credentials: "include",
   });
 
+  
   if (!response.ok) {
     throw new Error("Token invalid");
   }
@@ -69,7 +70,7 @@ export const validateToken = async () => {
 };
 
 export const signOut = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+  const response = await fetch(`/api/auth/logout`, {
     credentials: "include",
     method: "POST",
   });
@@ -80,7 +81,7 @@ export const signOut = async () => {
 };
 
 export const addMyHotel = async (hotelFormData: FormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+  const response = await fetch(`/api/my-hotels`, {
     method: "POST",
     credentials: "include",
     body: hotelFormData,
@@ -94,7 +95,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
 };
 
 export const fetchMyHotels = async (): Promise<HotelType[]> => {
-  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+  const response = await fetch(`/api/my-hotels`, {
     credentials: "include",
   });
 
@@ -106,7 +107,7 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => {
 };
 
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
-  const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+  const response = await fetch(`/api/my-hotels/${hotelId}`, {
     credentials: "include",
   });
 
@@ -119,7 +120,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
 
 export const updateMyHotelById = async (hotelFormData: FormData) => {
   const response = await fetch(
-    `${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
+    `/api/my-hotels/${hotelFormData.get("hotelId")}`,
     {
       method: "PUT",
       body: hotelFormData,
@@ -182,7 +183,7 @@ export const searchHotels = async (
 
 export const fetchHotels = async (): Promise<HotelType[]> => {
   const response = await fetch(
-    `${API_BASE_URL}/api/hotels`);
+    `/api/hotels`);
 
     if(!response.ok){
       throw new Error("Error fetching hotels")
@@ -202,7 +203,7 @@ export const fetchHotels = async (): Promise<HotelType[]> => {
 
 
 export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
+  const response = await fetch(`/api/hotels/${hotelId}`);
 
   if (!response.ok) {
     throw new Error("Error fetching hotels");
@@ -216,7 +217,7 @@ export const createPaymentIntent = async (
   numberOfNights: string
 ): Promise<PaymentIntentResposne> => {
   const response = await fetch(
-    `${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
+    `/api/hotels/${hotelId}/bookings/payment-intent`,
     {
       credentials: "include",
       method: "POST",
@@ -236,7 +237,7 @@ export const createPaymentIntent = async (
 
 export const createRoomBooking =  async ( formData: BookingFormData) => {
   const response = await fetch(
-    `${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`,{
+    `/api/hotels/${formData.hotelId}/bookings`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -254,7 +255,7 @@ export const createRoomBooking =  async ( formData: BookingFormData) => {
 
 export const fetchMyBookings = async (): Promise<HotelType[]> => {
   const response = await fetch(
-    `${API_BASE_URL}/api/my-booking`, {
+    `/api/my-booking`, {
       credentials: "include"
     })
 
@@ -284,7 +285,7 @@ export const createRazorpayOrder = async (
   try {
     
     const response = await fetch(
-      `${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
+      `/api/hotels/${hotelId}/bookings/payment-intent`,
       {
         credentials: "include",
         method: "POST",
